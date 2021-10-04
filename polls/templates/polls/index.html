@@ -1,12 +1,23 @@
+{% extends 'polls/base/base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>polls index page</title>
-    <link rel="stylesheet" href="{% static 'polls/styles/base.css' %}">
-</head>
-<body>
-    <button type="reset">reset</button>
-</body>
-</html>
+{% block title %}polls index page{% endblock %}
+
+<!--    <link rel="stylesheet" href="{% static 'polls/styles/base.css' %}">-->
+{% block body %}
+     {% if show %}
+            <ol>
+                 {% for location_file in location_files %}
+                      {% include 'polls/includes/where-item.html' with location=location_file %}
+                {% endfor %}
+             </ol>
+            <ol>
+                {% for permission in permissions %}
+                    <li>
+                        <span>hello {{permission.type}}</span>
+                        <a href="{% url 'action-page' permission.action %}">{{permission.action}}</a>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+{% endblock %}
