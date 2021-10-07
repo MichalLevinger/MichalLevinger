@@ -3,9 +3,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{action}}</title>
+    <title>{{permission.action}}</title>
 </head>
 <body>
-    <p>your {{action}} action successfully</p>
+    <p>your {{permission.action}} action successfully</p>
+    <img src="{{ permission.image.url }}" alt="{{ permission.action }}" width="50" height="100">
+    <form action="{% url 'action-page' permission.action %}" method="POST">
+        {% csrf_token %}
+        <ul>
+            {{ register_person_form.as_ul }}
+        </ul>
+        <button type="submit">Add</button>
+    </form>
 </body>
 </html>
